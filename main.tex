@@ -114,18 +114,18 @@
 % ==============================================================================
 
 % --- Informações do documento (preencher conforme o trabalho) ---
-\titulo{Título do Relatório}
-\autor{Nome do Estudante}
-\local{Ijuí/RS}
-\data{ANO DA ENTREGA}
-\orientador{Prof. xxxx}
+\titulo{Automação da Geração de Propostas Comerciais em PDF com Django e \LaTeX}
+\autor{Cristian dos Santos Siqueira}
+\local{Santa Rosa/RS}
+\data{2026}
+\orientador{Prof. Manuel Osorio Binelo}
 \instituicao{%
     Universidade Regional do Noroeste do\\[1mm]
     Estado do Rio Grande do Sul
 }
 
 % --- Informações específicas da UNIJUÍ (definidas no unijui.sty) ---
-\campus{Ijuí}
+\campus{Santa Rosa}
 \curso{Ciência da Computação}
 \professordabanca{Prof(a). xxxx}
 \datadabanca{XX}{XXX}{XXXX}
@@ -134,16 +134,38 @@
 % Não adicione ponto final do texto. Na folha de rosto o ponto irá aparecer automaticamente, 
 % já na folha de aprovação ao invés de ponto irá aparecer uma vírgula, seguida do texto 
 % "submetido à aprovação da banca examinadora composta pelos seguintes membros:"
-\preambulo{Relatório apresentado ao curso de xxxxx da Universidade Regional do Noroeste do Estado do Rio Grande do Sul - UNIJUÍ, como requisito para a obtenção do grau de xxxx}
+\preambulo{Relatório de Estágio Supervisionado apresentado ao curso de Ciência da Computação da Universidade Regional do Noroeste do Estado do Rio Grande do Sul --- UNIJUÍ, como requisito parcial para a obtenção do grau de Bacharel em Ciência da Computação}
 
 % --- Resumo e Abstract ---
 \resumoemportugues{%
-    Escreva aqui o resumo do trabalho em português. O resumo deve conter
-    entre 150 e 500 palavras e apresentar de forma concisa os objetivos,
-    a metodologia, os resultados e as conclusões do trabalho.
+    Este relatório descreve as atividades desenvolvidas durante o estágio curricular obrigatório
+    realizado na BIOTECNO Indústria e Comércio Ltda., empresa fabricante de equipamentos de
+    refrigeração científica localizada em Santa Rosa, Rio Grande do Sul. O estágio foi realizado
+    no contexto do sistema web interno da empresa, desenvolvido com o framework Django, que concentra
+    os módulos de gestão comercial. O objetivo central do trabalho foi
+    desenvolver um módulo de geração automatizada de propostas técnicas e comerciais em PDF,
+    substituindo a abordagem anterior baseada na biblioteca PyLaTeX, que gerava documentos de forma
+    estática e exigia intervenção direta no código-fonte a cada alteração de layout. A solução
+    desenvolvida fundamenta-se em uma arquitetura orientada a layouts intercambiáveis: um novo modelo
+    de dados, denominado \texttt{LayoutOrcamento}, foi projetado e implementado para permitir o
+    cadastro e a ativação de templates de proposta diretamente pelo painel administrativo do Django,
+    sem necessidade de alterações no código da aplicação. O template visual, elaborado por empresa de
+    design contratada, foi codificado em LaTeX pelo estagiário e estruturado para ser processado pelo
+    sistema de templates do Django, exigindo o tratamento adequado dos conflitos de sintaxe entre os
+    dois sistemas. Na camada de lógica da aplicação, foram implementadas funções responsáveis pela
+    resolução do diretório do layout ativo, pela montagem do contexto de dados, incluindo
+    informações do cliente, itens do orçamento, descrições técnicas por conjunto de produto e
+    condições comerciais e pela orquestração do pipeline de geração, que utiliza o compilador
+    LuaLaTeX via \texttt{latexmk} para produzir o documento final. Ao término do período de estágio,
+    o pipeline estava funcional em ambiente de desenvolvimento, com o template sendo renderizado e
+    compilado corretamente, e a injeção das variáveis de contexto em fase de validação final antes
+    da publicação em produção. O trabalho proporcionou a aplicação integrada de conhecimentos de
+    Engenharia de Software, modelagem relacional, desenvolvimento web e composição tipográfica,
+    consolidando competências técnicas e profissionais relevantes para a formação em Ciência da
+    Computação.
 }
 % Instrução: Use letras minúsculas para as palavras-chave, separe-as com ponto e vírgula (;) e encerre a última com um ponto (.)
-\palavraschaveemportugues{palavra-chave-1; palavra-chave-2; palavra-chave-3.}
+\palavraschaveemportugues{django; latex; geração de documentos; proposta comercial; engenharia de software; python.}
 
 
 % ==============================================================================
@@ -210,8 +232,21 @@
 
 % --- Agradecimentos ---
 \begin{agradecimentos}
-Agradeço a todos que contribuíram para a realização deste trabalho.
+À \textbf{Lídia Linck} e ao \textbf{Nerci Linck}, pela oportunidade de realizar o estágio na
+BIOTECNO Indústria e Comércio Ltda., pelo ambiente de trabalho que favorece o aprendizado e
+pelo espaço dado para contribuir de forma técnica e significativa com os sistemas da
+empresa.
 
+Ao supervisor de estágio, \textbf{Gustavo Henrique Buuron}, pela orientação direta no
+dia a dia do desenvolvimento, pela disponibilidade em discutir decisões técnicas e pela confiança
+depositada ao longo de todo o período de estágio.
+
+Ao professor orientador, \textbf{Prof. Manuel Osorio Binelo}, pelo acompanhamento acadêmico,
+pelas contribuições à estruturação do trabalho e pelo suporte durante a elaboração deste relatório.
+
+Ao \textbf{Prof. Eldair Fabricio Dornelles}, pelo desenvolvimento e disponibilização do template
+\LaTeX{} utilizado neste relatório, publicado de forma aberta no GitHub e que foi fundamental
+para a produção deste documento com qualidade tipográfica.
 \end{agradecimentos}
 
 % % --- Epígrafe ---
@@ -257,16 +292,26 @@ Agradeço a todos que contribuíram para a realização deste trabalho.
 
 % --- Lista de abreviaturas e siglas ---
 \begin{siglas}
-    \item[ABNT] Associação Brasileira de Normas Técnicas
-    \item[TCC] Trabalho de Conclusão de Curso
+    \item[ABNT]   Associação Brasileira de Normas Técnicas
+    \item[ANVISA] Agência Nacional de Vigilância Sanitária
+     \item[CNAE]   Classificação Nacional de Atividades Econômicas
+    \item[CNPJ]   Cadastro Nacional da Pessoa Jurídica
+    \item[FDA]    \textit{Food and Drug Administration}
+    \item[HTTP]   \textit{Hypertext Transfer Protocol}
+    \item[MVC]    \textit{Model-View-Controller}
+    \item[MTV]    \textit{Model-Template-View}
+    \item[ORM]    \textit{Object-Relational Mapper}
+    \item[PDF]    \textit{Portable Document Format}
+    \item[SQL]    \textit{Structured Query Language}
+    \item[TCC]    Trabalho de Conclusão de Curso
     \item[UNIJUÍ] Universidade Regional do Noroeste do Estado do Rio Grande do Sul
 \end{siglas}
 
 % --- Lista de símbolos ---
-\begin{simbolos}
-    \item[$ \Gamma $] Letra grega Gama
-    \item[$ \Lambda $] Lambda
-\end{simbolos}
+%\begin{simbolos}
+%    \item[$ \Gamma $] Letra grega Gama
+%    \item[$ \Lambda $] Lambda
+%\end{simbolos}
 
 % --- Sumário ---
 \pdfbookmark[0]{\contentsname}{toc}
@@ -295,18 +340,17 @@ Agradeço a todos que contribuíram para a realização deste trabalho.
 \bibliography{referencias}
 
 % --- Apêndices ---
-\begin{apendicesenv}
+%\begin{apendicesenv}
     % %Imprime uma página indicando o início dos apêndices
     % \partapendices
 
-    \input{apendices/apendice-a}
-\end{apendicesenv}
+%    \input{apendices/apendice-a}
+%\end{apendicesenv}
 
 % --- Anexos ---
 \begin{anexosenv}
     % %Imprime uma página indicando o início dos anexos
-    % \partanexos
-
+     \partanexos
     \input{anexos/anexo-a}
 \end{anexosenv}
 

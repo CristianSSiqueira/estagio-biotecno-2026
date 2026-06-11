@@ -5,17 +5,34 @@
 \chapter{Introdução}
 \label{cap:introducao}
 
-% Contextualização do tema
+A transformação digital tem impactado de forma crescente os processos internos das empresas industriais,
+tornando a automação de documentos e a integração entre sistemas operacionais cada vez mais estratégicas
+para a competitividade. Nesse contexto, o desenvolvimento de software empresarial, em especial sistemas
+de gestão customizados, emerge como uma disciplina central da Engenharia de Software, exigindo dos
+profissionais habilidades que vão desde a modelagem de dados até a geração automatizada de documentos com
+alto padrão visual.
 
-Nesta seção, você deve descrever o cenário de tecnologia e a empresa onde o estágio foi realizado. 
-Comece contextualizando a grande área do conhecimento (como a Computação ou Engenharia de Software)
- e relacione-a com a atuação da empresa. Depois, fale sobre a área mais específica do seu trabalho 
- (ex: desenvolvimento web, banco de dados ou infraestrutura). Por fim, descreva o problema ou necessidade
-  que existia no contexto da empresa e a solução que você propôs ou ajudou a desenvolver. O texto deve começar 
-falando da area e mercado em geral e terminar focando no seu papel específico, apresentando o 
-objetivo deste relatório: registrar as atividades que você fez e o que você aprendeu.
+A BIOTECNO Indústria e Comércio Ltda., empresa fabricante de equipamentos de refrigeração científica
+localizada em Santa Rosa (RS), opera com um sistema web interno denominado Bioweb, desenvolvido em
+Django. Dentro do módulo comercial do Bioweb, a geração de propostas técnicas e comerciais é uma das
+atividades de maior impacto direto no relacionamento com clientes, pois o documento produzido representa
+a empresa perante o mercado.
 
+Até o início deste estágio, os orçamentos em PDF eram gerados por meio da biblioteca PyLaTeX, que
+construía o documento de forma programática e estática, ou seja, qualquer alteração no layout da
+proposta exigia modificação direta no código-fonte Python. Esse modelo limitava a capacidade de
+atualização visual das propostas e criava dependência técnica para ajustes que, em essência, são decisões
+de negócio e identidade visual. Paralelamente, a empresa contratou uma empresa de design para a criação
+de um novo layout de proposta comercial, o qual precisava ser integrado ao sistema existente de forma
+flexível e sustentável.
 
+Este relatório descreve as atividades desenvolvidas ao longo do estágio curricular obrigatório realizado
+na BIOTECNO, com foco na concepção e implementação de um sistema de geração automatizada de propostas
+comerciais em PDF. O trabalho envolveu a codificação do template LaTeX a partir do layout entregue pela
+empresa de design, a modelagem de um novo conjunto de entidades no banco de dados, e o desenvolvimento
+da lógica de geração de documentos na camada de \textit{views} do Django com ênfase em uma arquitetura
+que permita a troca de layouts diretamente pelo painel administrativo, sem necessidade de alterações no
+código.
 
 %-------------------------------------------------
 % Justificativa
@@ -23,12 +40,20 @@ objetivo deste relatório: registrar as atividades que você fez e o que você a
 \section{Justificativa}
 \label{sec:justificativa}
 
-A justificativa deve evidenciar a importância da experiência prática para a 
-consolidação das competências previstas no currículo acadêmico de Computação/Engenharia de Software. 
-É necessário destacar como a resolução de problemas reais contribui para o amadurecimento profissional 
-e técnico do estagiário. Além disso, mencione o valor agregado para a empresa 
-(ex: otimização de processos, desenvolvimento de módulos, suporte técnico) e 
-como essa integração universidade-empresa fortalece a formação acadêmica.
+A prática de estágio supervisionado constitui etapa fundamental na formação do profissional de Ciência da
+Computação, pois permite a aplicação concreta dos conhecimentos construídos ao longo do curso em
+problemas reais de complexidade e escala incompatíveis com o ambiente acadêmico isolado. A exposição a
+decisões de arquitetura de software com impacto direto em processos de negócio desenvolve no estagiário
+uma visão sistêmica que complementa a formação teórica.
+
+Do ponto de vista acadêmico, o projeto demandou a aplicação integrada de conteúdos de Engenharia de
+Software (modelagem de requisitos, padrões de projeto), Banco de Dados (modelagem relacional, migrações),
+Desenvolvimento Web (arquitetura MVC/MTV, \textit{views} baseadas em função) e Sistemas de Composição
+Tipográfica (\LaTeX{}), demonstrando a interdisciplinaridade inerente ao desenvolvimento de sistemas
+reais. A necessidade de integrar dois sistemas com gramáticas conflitantes --- o motor de templates do
+Django e a sintaxe do \LaTeX{} --- e de tomar decisões arquiteturais com impacto direto na
+manutenibilidade do sistema são exemplos de desafios que a formação acadêmica prepara teoricamente,
+mas que só se consolidam no contato com um ambiente produtivo real.
 
 %-------------------------------------------------
 % Objetivos
@@ -39,41 +64,38 @@ como essa integração universidade-empresa fortalece a formação acadêmica.
 \subsection{Objetivo Geral}
 \label{subsec:objective-geral}
 
-O objetivo geral deve expressar a meta principal do estágio de forma sintetizada.
-Ele deve iniciar com um verbo no infinitivo que denote ação e resultado. Exemplos comuns na nossa área:\\
- - Desenvolver sistemas de software utilizando tecnologias X e Y...\\
- - Implementar rotinas de automação para...\\
- - Analisar e otimizar a infraestrutura de rede da empresa...
+Desenvolver um módulo de geração automatizada de propostas técnicas e comerciais em PDF, integrado ao
+sistema Django da BIOTECNO, com suporte a layouts intercambiáveis gerenciáveis pelo painel administrativo,
+substituindo a abordagem estática anterior baseada na biblioteca PyLaTeX.
 
 \subsection{Objetivos Específicos}
 \label{subsec:objetivos-especificos}
 
-Os objetivos específicos devem detalhar as etapas técnicas e operacionais que permitirão o alcance do objetivo geral. 
-Devem ser mensuráveis e diretos. Exemplos comuns na nossa área:
-
 \begin{alineas}
-    \item Realizar o levantamento de requisitos junto aos usuários ou gestores;
-    \item Elaborar a documentação técnica e diagramas de arquitetura (UML, MER);
-    \item Codificar módulos ou funcionalidades utilizando a linguagem [Java/TypeScript/etc.];
-    \item Executar testes unitários e de integração para garantir a qualidade do software;
-    \item Documentar os manuais de uso ou processos de implantação.
+    \item Analisar o processo vigente de geração de orçamentos e levantar os requisitos funcionais e
+    não funcionais do novo sistema;
+    \item Traduzir o layout visual elaborado pela empresa de design para um template \LaTeX{} funcional,
+    parametrizável via sistema de templates do Django;
+    \item Modelar e implementar o modelo \texttt{LayoutOrcamento} no banco de dados, incluindo suporte
+    ao upload de templates compactados e ao mecanismo de layout ativo único;
+    \item Desenvolver as funções de resolução de diretório de layout, montagem de contexto e geração de
+    PDF na camada de \textit{views} do Django, integrando o pipeline completo do banco de dados à
+    entrega do documento ao navegador;
+    \item Documentar o processo de desenvolvimento e os procedimentos necessários para manutenção
+    futura da solução.
 \end{alineas}
-
-
-
 
 %-------------------------------------------------
 % Estrutura do Trabalho
 %-------------------------------------------------
 \section{Estrutura do Trabalho}
 \label{sec:estrutura}
-Nesta seção, você deve explicar como o seu relatório está organizado.
-Cite cada capítulo do trabalho (Introdução, Empresa, Metodologia, Revisão, Desenvolvimento e Conclusão) e 
-resuma em uma frase curta o que o leitor encontrará em cada um deles. 
-O objetivo é servir como um "guia" que antecipa a ordem das informações que serão apresentadas.
 
-Exemplo:
-
-Para melhor compreensão, este relatório está estruturado em capítulos. Além desta Introdução,
-o \autoref{ch:apresentacao-empresa} apresenta o perfil da organização onde o estágio foi realizado. 
-O \autoref{cap:metodologia} detalha os procedimentos, métodos ....
+Para melhor compreensão, este relatório está organizado em capítulos sequenciais. Além desta Introdução,
+o \autoref{ch:apresentacao-empresa} apresenta o perfil da BIOTECNO Indústria e Comércio Ltda. e o
+ambiente tecnológico em que o estágio foi realizado. O \autoref{cap:metodologia} descreve a sistemática
+de trabalho adotada, as ferramentas utilizadas e a forma como as demandas foram gerenciadas ao longo do
+período. O \autoref{ch:revisao-bibliografica} fundamenta tecnicamente o projeto, discutindo os principais
+conceitos e tecnologias empregados. O \autoref{cap:desenvolvimento} detalha o processo completo de
+análise, modelagem e implementação do sistema de geração de orçamentos. Por fim, o
+\autoref{cap:consideracoes} apresenta as conclusões e perspectivas de trabalhos futuros.

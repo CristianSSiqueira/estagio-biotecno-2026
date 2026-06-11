@@ -1,13 +1,36 @@
 % ==============================================================================
-% CAPÍTULO 4 - METODOLOGIA
+% CAPÍTULO 3 - METODOLOGIA
 % ==============================================================================
 
 \chapter{Metodologia}
 \label{cap:metodologia}
 
+O estágio foi realizado de forma presencial nas dependências da BIOTECNO, com carga horária distribuída
+ao longo da semana conforme acordo com o supervisor Gustavo Henrique Buuron. As demandas de
+desenvolvimento foram conduzidas de maneira iterativa e incremental, próxima a uma abordagem ágil
+informal: as tarefas eram discutidas com o supervisor, executadas em ciclos curtos e revisadas à medida
+que os resultados parciais emergiam, permitindo ajustes contínuos de escopo e implementação.
 
-Nesta seção, você deve descrever como o trabalho foi organizado no dia a dia. 
-Explique a sistemática utilizada, mencionando se a empresa adota alguma metodologia 
-ágil (como Scrum ou Kanban) para gerenciar as tarefas. Descreva como as demandas 
-eram passadas pelo seu supervisor, as etapas que você seguiu para executá-las (análise, desenvolvimento, testes)
-e quais ferramentas e tecnologias foram aplicadas para resolver os problemas.
+A organização das atividades seguiu um fluxo composto pelas seguintes etapas: (1) compreensão do
+problema ou requisito apresentado pelo supervisor; (2) análise do sistema existente, leitura de
+\textit{models}, \textit{views} e templates já implementados, para entender o contexto de integração;
+(3) implementação da solução, com testes manuais no ambiente de desenvolvimento; e (4) revisão conjunta
+com o supervisor antes de integrar a funcionalidade à base de código principal.
+
+As ferramentas e tecnologias centrais do projeto foram:
+
+\begin{alineas}
+    \item \textbf{Python} e \textbf{Django}: linguagem e framework base do sistema web da empresa,
+    utilizados em todas as etapas de desenvolvimento \cite{django2024};
+    \item \textbf{LaTeX} com compilador \textbf{LuaLaTeX} via \texttt{latexmk}: sistema de composição
+    tipográfica utilizado para a geração dos documentos PDF \cite{latex2023};
+    \item \textbf{PostgreSQL}: sistema gerenciador de banco de dados relacional utilizado pela aplicação;
+    \item \textbf{Git}: controle de versão para rastreamento das alterações no código-fonte;
+    \item \textbf{Django Admin}: interface administrativa nativa do Django, utilizada como ponto de
+    gerenciamento dos layouts de orçamento.
+\end{alineas}
+
+A comunicação técnica com o supervisor ocorreu diariamente, permitindo que decisões de arquitetura 
+como a escolha de resolver o layout ativo em tempo de geração em vez de vinculá-lo ao modelo
+\texttt{Orcamento} fossem validadas antes de serem implementadas. Essa dinâmica reduziu retrabalho e
+garantiu que a solução fosse coerente com as necessidades operacionais da empresa.

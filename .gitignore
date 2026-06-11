@@ -1,0 +1,20 @@
+# Arquivos gerados pela compilação LaTeX
+*.aux
+*.bbl
+*.blg
+*.brf
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.loq
+*.out
+*.synctex.gz
+*.toc
+*.pdf
+
+# Exceto o PDF final, se quiser versionar
+!main.pdf
+
+# Zip
+*.zip

@@ -1,41 +1,98 @@
 % ==============================================================================
-% CAPÍTULO 2 - REVISÃO BIBLIOGRÁFICA
+% CAPÍTULO 4 - REVISÃO BIBLIOGRÁFICA
 % ==============================================================================
 
-\chapter{REVISÃO BIBLIOGRÁFICA} 
+\chapter{Revisão Bibliográfica}
 \label{ch:revisao-bibliografica}
 
-Nesta seção, você deve fundamentar tecnicamente o seu estágio. 
-Escreva um parágrafo introdutório apresentando os principais temas que 
-serão discutidos e utilize subseções para organizar cada tecnologia ou 
-conceito (ex: Linguagem Java, Banco de Dados, Frameworks). 
-O objetivo é explicar as teorias e ferramentas utilizadas, demonstrando 
-domínio técnico através de citações de autores ou documentações oficiais.
+Este capítulo apresenta os fundamentos teóricos e tecnológicos que embasam o trabalho desenvolvido
+durante o estágio. São abordados os principais conceitos relacionados ao desenvolvimento web com Django,
+à geração de documentos com LaTeX e à modelagem de dados relacional, pilares sobre os quais a solução
+de geração automatizada de propostas comerciais foi construída.
 
+%-------------------------------------------------
+\section{Django e o Padrão MTV}
+%-------------------------------------------------
+\label{sec:django}
 
-Abaixo, estão disponibilizados exemplos de como realizar as citações no texto utilizando os comandos do LaTeX.
-Lembre-se de que todas as fontes citadas aqui devem estar cadastradas no seu arquivo de referências (.bib) 
-para que sejam geradas automaticamente na lista final do trabalho.
+Django é um \textit{framework} web de alto nível escrito em Python, projetado para facilitar o
+desenvolvimento rápido de aplicações web seguras e de fácil manutenção \cite{django2024}. Sua arquitetura
+segue o padrão MTV (\textit{Model-Template-View}), uma variação do amplamente conhecido MVC
+(\textit{Model-View-Controller}), no qual o \textit{Model} define a estrutura dos dados e sua relação
+com o banco de dados; o \textit{Template} é responsável pela apresentação, seja HTML, seja um documento
+LaTeX, como utilizado neste projeto; e a \textit{View} concentra a lógica de negócio, recebendo
+requisições HTTP, consultando os modelos e retornando uma resposta ao cliente \cite{holovaty2009}.
 
-\textbf{Exemplos de citações:}
+Um dos componentes centrais do Django utilizado neste projeto é o ORM (\textit{Object-Relational
+Mapper}), que permite interagir com o banco de dados por meio de classes Python, abstraindo a escrita
+de SQL. Cada modelo Django é uma subclasse de \texttt{django.db.models.Model}, e seus atributos
+correspondem às colunas de uma tabela relacional. As migrações, geradas automaticamente pelo comando
+\texttt{makemigrations}, traduzem alterações nos modelos em operações de banco de dados reproduzíveis e
+controladas por versão \cite{django2024}.
 
-Use o \texttt{\textbackslash citeonline\{\}} quando você quiser citar o nome do autor
- diretamente no seu texto (o LaTeX deixará apenas o ano entre parênteses).\\
- \textbf{Exemplo:} Segundo \citeonline{almeida2022}, a escolha correta de algoritmos de otimização é fundamental para melhorar o desempenho e a velocidade de resposta em sistemas distribuídos.\\
+O sistema de \textit{templates} do Django suporta uma linguagem própria de marcação que permite
+interpolação de variáveis, estruturas de controle (\textit{if}, \textit{for}) e herança de templates.
+Por padrão, os delimitadores dessa linguagem são chaves duplas para variáveis e blocos
+percentual-chave para \textit{tags}, o que pode gerar conflitos com a sintaxe do LaTeX, cujo
+caractere de percentual tem função de comentário e cujas chaves são usadas extensivamente como
+delimitadores de comandos. Esse conflito demanda atenção durante o desenvolvimento de templates LaTeX
+processados pelo Django.
 
-Use o \texttt{\textbackslash cite\{\}} quando fizer uma afirmação e quiser indicar a fonte apenas ao final (o LaTeX colocará o nome e o ano entre parênteses).\\
-\textbf{Exemplo:} A utilização de sistemas distribuídos exige uma análise detalhada sobre como os algoritmos de otimização podem reduzir o tempo de processamento dos dados \cite{almeida2022}.
+%-------------------------------------------------
+\section{LaTeX e Geração de Documentos}
+%-------------------------------------------------
+\label{sec:latex}
 
-\textbf{Citações usadas para gerar as referências de exemplo:}\\
-Estes exemplos são utilizados para mostrar como citar diferentes tipos de fontes são apresentados ao final do documento nas referências.\\
-Verifique os campos necessários no arquivo "referencias.bib" para que elas apareçam corretamente nas Referências:  \\
-Dissertação, \cite{almeida2022}\\
-Trabalho publicado em Conferência, \cite{cbsoft2023}\\
-Página web, \cite{ferreira2020}\\
-Manual, \cite{latex2023}\\
-Capitulo de livro, \cite{mendes2019}\\
-Relatório técnico, \cite{oliveira2020}\\
-Livro, \cite{linden2012}\\
-Tese de doutorado, \cite{rodrigues2021}\\
-Artigo científico, \cite{silva2023}\\
-Livro de Conferência, \cite{souza2022}
+LaTeX é um sistema de preparação de documentos baseado no programa de composição tipográfica TeX,
+desenvolvido por Donald Knuth \cite{knuth1984}. Diferentemente de editores \textit{WYSIWYG}
+(\textit{What You See Is What You Get}), no LaTeX o autor descreve a estrutura e o conteúdo do documento
+por meio de comandos textuais, e o sistema se encarrega da diagramação final, resultando em documentos
+com qualidade tipográfica superior \cite{lamport1994}.
+
+Para a compilação de documentos LaTeX em arquivos PDF, este projeto utiliza o compilador
+\textbf{LuaLaTeX}, variante moderna do LaTeX com suporte nativo a Unicode e a fontes OpenType, em
+conjunto com o utilitário \texttt{latexmk}, que automatiza o processo de compilação, executando o
+compilador quantas vezes forem necessárias para resolver referências cruzadas, sumários e outros
+elementos que dependem de múltiplas passagens \cite{latex2023}.
+
+A abordagem adotada neste projeto, renderizar um template \texttt{.tex} com o sistema de templates do
+Django e, em seguida, compilá-lo com \texttt{latexmk}, é uma estratégia consolidada para geração de
+PDFs com alto controle tipográfico em aplicações web, especialmente quando o documento exige layout
+complexo, como tabelas posicionadas com precisão, imagens integradas e fontes customizadas.
+
+%-------------------------------------------------
+\section{Modelagem Relacional e Django ORM}
+%-------------------------------------------------
+\label{sec:modelagem-relacional}
+
+A modelagem relacional é a base sobre a qual os sistemas de informação organizam e persistem seus dados.
+No contexto do Django, a definição dos modelos determina diretamente a estrutura do banco de dados e,
+consequentemente, as possibilidades de consulta e relacionamento entre entidades \cite{elmasri2011}.
+
+Neste projeto, um aspecto relevante da modelagem é a decisão de \textbf{não} vincular o layout de
+orçamento diretamente ao modelo \texttt{Orcamento} por meio de uma chave estrangeira. Em vez disso, o
+sistema resolve o layout ativo em tempo de geração, consultando o modelo \texttt{LayoutOrcamento} pelo
+campo \texttt{is\_active}. Essa decisão arquitetural segue o princípio de baixo acoplamento
+(\textit{loose coupling}): o modelo de negócio central (\texttt{Orcamento}) permanece desacoplado das
+decisões de apresentação (layout), facilitando a evolução independente de ambos \cite{martin2002}.
+
+O campo \texttt{AutoSlugField}, fornecido pela biblioteca \texttt{django-autoslug}, gera
+automaticamente um identificador textual único a partir de outro campo do modelo — neste caso, a
+descrição do layout — sem requerer intervenção manual, o que simplifica a identificação de registros em
+rotas e na interface administrativa.
+
+%-------------------------------------------------
+\section{Arquitetura de Software e Boas Práticas}
+%-------------------------------------------------
+\label{sec:arquitetura}
+
+O princípio da separação de responsabilidades (\textit{Separation of Concerns}) orienta a organização do
+código em camadas com papéis bem definidos \cite{dijkstra1982}. No contexto deste projeto, ele se
+manifesta na divisão entre: (a) a camada de modelos, responsável pela persistência e pela lógica de
+dados; (b) a camada de \textit{views}, responsável pela orquestração, ou seja, a resolução do layout ativo, montagem
+do contexto e acionamento do compilador; e (c) a camada de templates, responsável exclusivamente pela
+estrutura visual do documento LaTeX.
+
+Essa separação garante que alterações no layout não exijam modificações na lógica da \textit{view}, e
+que mudanças nas regras de negócio não impactem a estrutura do template, reduzindo o custo de
+manutenção e aumentando a testabilidade do sistema \cite{martin2002}.

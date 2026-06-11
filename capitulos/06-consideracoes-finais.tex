@@ -1,38 +1,72 @@
 % ==============================================================================
-% CAPÍTULO 5 - CONSIDERAÇÕES FINAIS
+% CAPÍTULO 6 - CONSIDERAÇÕES FINAIS
 % ==============================================================================
 
 \chapter{Considerações Finais}
 \label{cap:consideracoes}
 
-Neste capítulo, você deve encerrar o relatório fazendo um balanço crítico da sua experiência. 
-Escreva um parágrafo inicial retomando o objetivo geral do estágio e confirme se ele foi alcançado.
-É o momento de refletir sobre como as atividades desenvolvidas contribuíram para o seu crescimento 
-profissional e para a solução dos problemas da empresa.
+O estágio realizado na BIOTECNO Indústria e Comércio Ltda. teve como objetivo central o desenvolvimento
+de um módulo de geração automatizada de propostas técnicas e comerciais em PDF, com suporte a layouts
+intercambiáveis gerenciáveis pelo painel administrativo do Django. O objetivo foi alcançado: ao término
+do período, o sistema estava implementado e funcional em ambiente de desenvolvimento, com pipeline de
+geração completo da resolução do layout ativo à entrega do PDF compilado pelo LuaLaTeX, pronto
+para ser integrado ao ambiente de produção na próxima atualização da aplicação.
 
-%-------------------------------------------------
-% Conclusões
 %-------------------------------------------------
 \section{Conclusões}
+%-------------------------------------------------
 \label{sec:conclusoes}
 
-Descreva os principais aprendizados e resultados obtidos. Destaque como a teoria da universidade
-se conectou com a prática do mercado e quais foram as lições mais valiosas (técnicas ou comportamentais). 
-Evite repetir descrições de tarefas; foque na análise do valor que o estágio agregou à sua formação e à instituição concedente.
+A experiência de estágio proporcionou uma imersão em decisões técnicas que raramente se apresentam com
+a mesma complexidade e consequência no ambiente acadêmico. A necessidade de integrar dois sistemas com
+gramáticas conflitantes, o motor de templates do Django e a sintaxe do LaTeX, exigiu compreensão
+profunda de como cada camada funciona internamente, indo além do uso superficial das ferramentas. Da
+mesma forma, a decisão de não acoplar o layout ao modelo \texttt{Orcamento} foi fruto de uma análise
+de \textit{trade-offs} reais: entre consistência histórica e flexibilidade operacional, optou-se pela
+flexibilidade — decisão validada pelo contexto de negócio da empresa.
 
+Do ponto de vista técnico, o estágio consolidou conhecimentos em Django ORM, modelagem relacional,
+geração de documentos com LaTeX e integração de processos externos via \texttt{subprocess}, conteúdos
+abordados no curso de Ciência da Computação e que, no contexto prático, revelaram nuances e
+interdependências não evidentes na teoria. A leitura e compreensão de um sistema de software já em
+produção, com múltiplos módulos, convenções próprias e histórico de decisões acumulado, foi por si só
+um aprendizado valioso para a formação profissional.
 
-%-------------------------------------------------
-% Trabalhos Futuros
+Do ponto de vista comportamental, a dinâmica de trabalho com ciclos curtos de revisão junto ao
+supervisor reforçou a importância da comunicação técnica clara e da validação incremental de decisões
+de arquitetura. Erros foram identificados e corrigidos precocemente, evitando retrabalho de maior
+escala.
+
+Um aspecto relevante que o estágio evidenciou, e que raramente é abordado no ambiente acadêmico,
+é a prática de substituição progressiva de código legado por soluções mais modernas e padronizadas.
+A migração do módulo de orçamentos do PyLaTeX para a arquitetura de templates Django não foi motivada
+por uma falha crítica do sistema anterior, mas pela necessidade de padronização interna e pela
+oportunidade de tornar o sistema mais sustentável a longo prazo. Identificar esse tipo de demanda,
+propor uma solução arquitetural coerente e executá-la sem quebrar o que já funcionava é uma habilidade
+que a formação acadêmica prepara teoricamente, mas que só se desenvolve plenamente na prática.
+
+Por fim, o fato de já atuar na empresa de forma remunerada antes do início do estágio
+curricular teve impacto direto na produtividade e na qualidade das entregas. O conhecimento prévio
+do sistema Bioweb, das convenções de código adotadas pela equipe e da estrutura do projeto eliminou
+a curva de ambientação inicial, permitindo que o desenvolvimento começasse com foco imediato no
+problema técnico. Essa familiaridade também facilitou a leitura de módulos existentes como referência, como o uso do \texttt{viewsinspecao.py} para resolver o conflito de delimitadores Django e
+\LaTeX{}, acelerando decisões que, em outro contexto, exigiriam investigação mais prolongada.
+
 %-------------------------------------------------
 \section{Trabalhos Futuros}
+%-------------------------------------------------
 \label{sec:trabalhos-futuros}
 
-Sugira caminhos para a continuidade do trabalho, seja em novos projetos na empresa, 
-melhorias no sistema desenvolvido ou novas linhas de pesquisa acadêmica. 
-Seja específico sobre o que poderia ser feito a seguir e como isso agregaria valor.
+A continuidade natural do trabalho desenvolvido aponta para os seguintes encaminhamentos:
 
 \begin{itemize}
-    \item Sugestão de trabalho futuro 1;
-    \item Sugestão de trabalho futuro 2;
-    \item Sugestão de trabalho futuro 3.
+    \item \textbf{Publicação em produção}: integrar o novo sistema de geração ao ambiente de produção
+    da aplicação, substituindo definitivamente a função legada baseada em PyLaTeX, após validação
+    completa das variáveis de contexto com dados reais;
+    \item \textbf{Múltiplos layouts por tipo de venda}: ampliar o modelo \texttt{LayoutOrcamento} para
+    suportar diferentes layouts por categoria de venda (direta, licitação, revenda), permitindo que a
+    seleção do template seja automatizada com base nos atributos do orçamento;
+    \item \textbf{Interface de pré-visualização}: desenvolver uma funcionalidade de pré-visualização
+    do PDF no painel administrativo antes da ativação de um novo layout, reduzindo o risco de
+    publicação de templates com erros de formatação.
 \end{itemize}
