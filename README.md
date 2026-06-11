@@ -1,14 +1,17 @@
 # Relatório de Estágio - Template LaTeX UNIJUÍ
 
-Este é um projeto base (template) em LaTeX para desenvolvimento de Relatórios de Estágio Supervisionado, utilizando a classe abnTeX2. Ele foi customizado especificamente para atender aos padrões da UNIJUÍ (Universidade Regional do Noroeste do Estado do Rio Grande do Sul) para os cursos de:
-- Ciência da Computação
-- Engenharia de Software
-- Inteligência Artificial
+Este repositório é um *fork* do template original desenvolvido pelo
+**Prof. Eldair F. Dornelles**, disponível em:
+[https://github.com/dornelles/relatorio-de-estagio-template-latex](https://github.com/dornelles/relatorio-de-estagio-template-latex)
 
-Desenvolvido e mantido por: **Prof. Eldair F. Dornelles** ([eldair.dornelles@unijui.edu.br](mailto:eldair.dornelles@unijui.edu.br)).  
-A versão mais atualizada deste template pode ser obtida no GitHub: [https://github.com/dornelles/relatorio-de-estagio-template-latex](https://github.com/dornelles/relatorio-de-estagio-template-latex)
+Neste fork, o template foi utilizado como base para o Relatório de Estágio
+Supervisionado do curso de **Ciência da Computação** da UNIJUÍ, campus Santa Rosa,
+desenvolvido por **Cristian dos Santos Siqueira** (2026).
 
-Qualquer sugestão de melhoria será bem-vinda!
+O relatório documenta o desenvolvimento de um módulo de geração automatizada de
+propostas comerciais em PDF, integrado ao sistema Django da empresa
+BIOTECNO Indústria e Comércio Ltda., com suporte a layouts intercambiáveis
+gerenciados via painel administrativo.
 
 ---
 
